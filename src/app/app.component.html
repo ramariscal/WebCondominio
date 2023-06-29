@@ -1,7 +1,7 @@
 <ion-app style="width: 100%; height: 100%">
   <ion-split-pane contentId="main-content">
     <ion-menu
-      *ngIf="username"
+      *ngIf="usuario"
       contentId="main-content"
       type="overlay"
       style="width: 10%"
@@ -21,7 +21,7 @@
         <ion-list id="inbox-list">
           <ion-list-header
             >Bievenido:<br />
-            {{ username }} </ion-list-header
+            {{ usuario }} </ion-list-header
           ><br />
 
           <ion-item-group *ngFor="let p of appPages; let i = index">

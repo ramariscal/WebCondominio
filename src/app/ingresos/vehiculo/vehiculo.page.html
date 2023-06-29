@@ -20,8 +20,6 @@
     <ion-item>
       <ion-row class="encabezado">
         <ion-col class="column-width"><strong>PATENTE</strong></ion-col>
-        <ion-col class="column-width"><strong>TIPO</strong></ion-col>
-        <ion-col class="column-width"><strong>COLOR</strong></ion-col>
         <ion-col class="column-width"><strong>NOMBRE</strong></ion-col>
         <ion-col class="column-width"><strong>APELLIDO</strong></ion-col>
         <ion-col class="column-width"><strong>DEPTO</strong></ion-col>
@@ -36,18 +34,24 @@
     <ion-item *ngFor="let vehiculo of vehiculo">
       <ion-row>
         <ion-col class="column-width">{{ vehiculo.patente }}</ion-col>
-        <ion-col class="column-width">{{ vehiculo.tipo_veh }}</ion-col>
-        <ion-col class="column-width">{{ vehiculo.color_veh }}</ion-col>
-        <ion-col class="column-width">{{ vehiculo.primer_nombre }}</ion-col>
-        <ion-col class="column-width">{{ vehiculo.primer_apellido }}</ion-col>
-        <ion-col class="column-width">{{ vehiculo.id_departamento }}</ion-col>
+        <ion-col class="column-width">{{ vehiculo.nombre }}</ion-col>
+        <ion-col class="column-width">{{ vehiculo.apellido }}</ion-col>
         <ion-col class="column-width"
-          >{{ vehiculo.id_est + " " + vehiculo.tipo_est }}</ion-col
+          >{{ 'D: ' + vehiculo.id_departamento + ' T: ' + vehiculo.id_edificio
+          }}</ion-col
         >
-        <ion-col class="column-width">{{ vehiculo.fecha_ing }}</ion-col>
-        <ion-col class="column-width">{{ vehiculo.fecha_sal }}</ion-col>
-        <ion-col class="column-width">{{ vehiculo.tiempo_visita }}</ion-col>
-        <ion-col class="column-width">{{ vehiculo.veh_multa }}</ion-col>
+        <ion-col class="column-width">{{ vehiculo.id_est }}</ion-col>
+        <ion-col class="column-width"
+          >{{ formatDate(vehiculo.fecha_ing) }}</ion-col
+        >
+        <ion-col class="column-width"
+          >{{ formatDate(vehiculo.fecha_sal) }}</ion-col
+        >
+        <ion-col class="column-width"
+          >{{ calcularDuracion(vehiculo.fecha_ing, vehiculo.fecha_sal)
+          }}</ion-col
+        >
+        <ion-col class="column-width">{{ vehiculo.estatus }}</ion-col>
       </ion-row>
     </ion-item>
   </ion-list>

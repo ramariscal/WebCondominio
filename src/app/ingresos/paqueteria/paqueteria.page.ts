@@ -44,7 +44,6 @@ export class PaqueteriaPage implements OnInit {
     );
   }
 
-  
   exportarPaqueteria(paqueteria: any) {
     this.selectedPaqueteria = [{...paqueteria}]; // Crea un arreglo con una copia del objeto JSON
     this.pdfService.generarPDF(this.selectedPaqueteria).subscribe(
@@ -57,10 +56,6 @@ export class PaqueteriaPage implements OnInit {
       }
     );
   }
-    
-  
-  
-  
 
   formatDate(dateString: string): string {
     const date = new Date(dateString);
@@ -70,12 +65,6 @@ export class PaqueteriaPage implements OnInit {
     const hours = date.getHours().toString().padStart(2, "0");
     const minutes = date.getMinutes().toString().padStart(2, "0");
     return `${day}-${month}-${year}, ${hours}:${minutes}`;
-  }
-
-  evidencia(paqueteria: any[]) {
-    this.selectedPaqueteria = paqueteria;
-  
-    console.log(this.generarPDF);
   }
 
   async openModal(paqueteria: any) {
@@ -104,6 +93,5 @@ export class PaqueteriaPage implements OnInit {
       }
     );
   }
-  
-  
+    
 }

@@ -57,17 +57,14 @@
           paqueteria.id_edificio }}
         </ion-col>
         <ion-col class="column-width">{{ paqueteria.nombre_conjunto }}</ion-col>
-        <ion-col class="column-width">{{ paqueteria.rut_empleado }}</ion-col>
-        <ion-col class="column-width"
-          >{{ paqueteria.rut_empleado_ent }}</ion-col
-        >
+        <ion-col class="column-width">{{ paqueteria.usuario }}</ion-col>
+        <ion-col class="column-width">{{ paqueteria.usuario }}</ion-col>
         <ion-col class="column-width">
           <ion-button (click)="exportarPaqueteria(paqueteria)">
             Exportar
           </ion-button>
-          <ion-button (click)="openModal(paqueteria)">Foto</ion-button>
-          <ion-button (click)="evidencia(paqueteria)">Evidencia</ion-button>
-        </ion-col>
+          <ion-button (click)="openModal(paqueteria)">Foto</ion-button></ion-col
+        >
       </ion-row>
     </ion-item>
   </ion-list>

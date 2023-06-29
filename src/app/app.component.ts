@@ -8,7 +8,7 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class AppComponent {
   currentRoute: string = '';
-  username: string | null;
+  usuario: string | null;
 
   public appPages = [
     {
@@ -45,7 +45,7 @@ export class AppComponent {
   ];
 
   constructor(private router: Router) {
-    this.username = localStorage.getItem('username');
+    this.usuario = localStorage.getItem('usuario');
     router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
         const currentRoute = event.url;

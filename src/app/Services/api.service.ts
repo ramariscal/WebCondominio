@@ -42,5 +42,20 @@ export class ApiService {
     );
   }
 
+  authenticate(usuario: string, clave: string): Observable<any> {
+    const url = `${this.apiUrl}/authenticate`; // URL para la autenticación, ajusta según tu API
+    const body = {
+      usuario: usuario,
+      clave: clave
+    };
+
+    return this.http.post(url, body).pipe(
+      tap((response) => {
+        // Emitir el evento con la respuesta
+        this.eventService.emitApiResponse(response);
+      })
+    );
+  }
+
   // Agrega más métodos según tus necesidades (put, delete, etc.)
 }

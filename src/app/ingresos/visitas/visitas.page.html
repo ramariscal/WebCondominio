@@ -29,7 +29,7 @@
       </ion-row>
     </ion-item>
 
-    <ion-item *ngFor="let visita of visita">
+    <ion-item *ngFor="let visita of visitas">
       <ion-row>
         <ion-col class="column-width"
           >{{ visita.rut_visita + '-' + visita.dv }}</ion-col
@@ -42,8 +42,12 @@
           >{{ 'D: ' + visita.id_departamento + ' T: ' + visita.id_edificio
           }}</ion-col
         >
-        <ion-col class="column-width">{{ visita.fecha_ing }}</ion-col>
-        <ion-col class="column-width">{{ visita.fecha_sal }}</ion-col>
+        <ion-col class="column-width"
+          >{{ formatDate(visita.fecha_ing) }}</ion-col
+        >
+        <ion-col class="column-width"
+          >{{ formatDate(visita.fecha_sal) }}</ion-col
+        >
       </ion-row>
     </ion-item>
   </ion-list>

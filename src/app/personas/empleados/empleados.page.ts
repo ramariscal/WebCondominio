@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { EmpleadosService } from 'src/app/Services/Personal/empleados.service';
 import { ModalController } from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
+import { EditarEmpleadosComponent } from 'src/app/modals/editarempleados/editarempleados.component';
+
 
 @Component({
   selector: 'app-empleados',
@@ -10,14 +13,16 @@ import { ModalController } from '@ionic/angular';
 export class EmpleadosPage implements OnInit {
   public empleados: any[] = [];
   public empleadoSeleccionado: any = {};
-  public mostrarModal = false;
   public cargos: any[] = [];
   public comunas: any[] = [];
   public regiones: any[] = [];
+  public mostrarModal: boolean = false;
+
 
   constructor(
     private empleadosService: EmpleadosService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -74,25 +79,32 @@ export class EmpleadosPage implements OnInit {
     );
   }
 
-  editarEmpleado(empleado: any) {
-    if (empleado && empleado.rut) {
-      this.empleadoSeleccionado = { ...empleado };
-      this.mostrarModal = true;
-    }
-  }
+  async abrirModalEditarEmpleado(empleado: any) {
+    this.empleadoSeleccionado = JSON.parse(JSON.stringify(empleado));
+    this.mostrarModal = true;
+    const modal = await this.modalController.create({
+      component: EditarEmpleadosComponent,
+      componentProps: {
+        empleado: empleado
+      }
+    });
 
-  actualizarEmpleado() {
-    // Lógica de actualización de empleado
-    this.cerrarModal();
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    if (data) {
+      this.obtenerEmpleados();
+    }
   }
 
   cancelarEdicion() {
     this.empleadoSeleccionado = {};
-    this.mostrarModal = false;
+    this.cerrarModal();
   }
 
   cerrarModal() {
-    this.mostrarModal = false;
+    this.modalController.dismiss();
     this.empleadoSeleccionado = {};
-  }
+    this.mostrarModal = false;
+  }  
 }

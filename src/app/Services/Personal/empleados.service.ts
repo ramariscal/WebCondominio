@@ -7,11 +7,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EmpleadosService {
-  private empleadosEndPoint = 'empleados'; // Cambia el endpoint a 'empleados'
+  private empleadosEndPoint = 'empleados';
   private actualizarEndPoint = 'actualizarEmpleado';
-  private cargosEndPoint = 'buscarCargos'; // Cambia el endpoint a 'cargos'
-  private comunasEndPoint = 'buscarComunas'; // Cambia el endpoint a 'comunas'
-  private regionesEndPoint = 'buscarRegiones'; // Cambia el endpoint a 'regiones'
+  private cargosEndPoint = 'buscarCargos';
+  private comunasEndPoint = 'buscarComunas';
+  private regionesEndPoint = 'buscarRegiones';
 
   constructor(private apiService: ApiService, private eventService: EventService) { }
 
