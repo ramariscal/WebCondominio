@@ -1,0 +1,46 @@
+<ion-content [fullscreen]="true">
+  <div class="headtext">
+    <h1>Informes sobre el condominio:</h1>
+    <p>
+      Bienvenido a la página de informes del condominio. Aquí puedes revisar los
+      informes y ver diferentes parametros.
+    </p>
+  </div>
+  <ion-list>
+    <!-- Agrega un input y un botón para filtrar -->
+    <ion-item>
+      <h3>Tabla de Multas:</h3>
+      <div class="casillafiltro">
+        <ion-input placeholder="Ingrese texto de filtro"></ion-input>
+        <ion-button>Filtrar</ion-button>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-row class="encabezado">
+        <ion-col class="column-width"><strong>ID</strong></ion-col>
+        <ion-col class="column-width"><strong>MONTO</strong></ion-col>
+        <ion-col class="column-width"><strong>ESTADO</strong></ion-col>
+        <ion-col class="column-width"><strong>DEPTO</strong></ion-col>
+        <ion-col class="column-width"><strong>TORRE</strong></ion-col>
+        <ion-col class="column-width"><strong>CONDOMINIO</strong></ion-col>
+        <ion-col class="column-width"><strong>ACCION</strong></ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-item *ngFor="let multa of multas">
+      <ion-row>
+        <ion-col class="column-width">{{ multa.id_multa }}</ion-col>
+        <ion-col class="column-width">{{ multa.monto }}</ion-col>
+        <ion-col class="column-width">{{ multa.status }}</ion-col>
+        <ion-col class="column-width">{{ multa.id_departamento }}</ion-col>
+        <ion-col class="column-width">{{ multa.id_edificio }}</ion-col>
+        <ion-col class="column-width">{{ multa.id_conjunto }}</ion-col>
+        <ion-col class="column-width">
+          <ion-button (click)="toggleStatus(multa)">
+            {{ multa.buttonText }}
+          </ion-button></ion-col
+        >
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>

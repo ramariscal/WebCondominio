@@ -1,0 +1,33 @@
+<head>
+  <style>
+    .image-box {
+      margin: 10px 20%;
+      display: inline-block;
+      border: 1px solid #000;
+      margin: 10px;
+      text-align: center;
+      max-width: 45%;
+    }
+    .image-box img {
+      max-width: 100%;
+      max-height: 50vh; /* Limita la altura máxima al 50% del viewport height */
+      object-fit: contain; /* Ajusta la imagen dentro del contenedor sin distorsionarla */
+    }
+
+    @media (max-width: 768px) {
+      /* Media query para pantallas con un ancho máximo de 768px */
+      .image-box {
+        max-width: 100%; /* El ancho máximo del contenedor será del 100% */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="image-box">
+    <img src="{{ paqueteria.evidencia_recepcion }}" alt="Imagen 1" />
+  </div>
+
+  <div class="image-box">
+    <img src="{{ paqueteria.evidencia_entrega }}" alt="Imagen 2" />
+  </div>
+</body>

@@ -1,0 +1,126 @@
+<ion-content>
+  <div class="headtext">
+    <h1>Administración de Empleados:</h1>
+    <p>
+      Bienvenido a la página de administración de Empleados de condominio. Aquí
+      puedes gestionar los detalles de los empleados registrados.
+    </p>
+  </div>
+  <ion-list>
+    <!-- Agrega un input y un botón para filtrar -->
+    <ion-item>
+      <h3>Tabla de Empleados:</h3>
+      <ion-input
+        class="casillafiltro"
+        placeholder="Ingrese texto de filtro"
+      ></ion-input>
+      <ion-button>Filtrar</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-row class="encabezado">
+        <ion-col class="column-width"><strong>RUT</strong></ion-col>
+        <ion-col class="column-width"><strong>NOMBRE(S)</strong></ion-col>
+        <ion-col class="column-width"><strong>APELLIDO(S)</strong></ion-col>
+        <ion-col class="column-width"><strong>CORREO</strong></ion-col>
+        <ion-col class="column-width"><strong>ESTADO</strong></ion-col>
+        <ion-col class="column-width"><strong>CARGO</strong></ion-col>
+        <ion-col class="column-width"><strong>DIRECCIÓN</strong></ion-col>
+        <ion-col class="column-width"><strong>COMUNA</strong></ion-col>
+        <ion-col class="column-width"><strong>REGIÓN</strong></ion-col>
+        <ion-col class="column-width"><strong>ACCIÓN</strong></ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-item *ngFor="let empleado of empleados">
+      <ion-row>
+        <ion-col class="column-width"
+          >{{ empleado.rut + '-' + empleado.dv}}</ion-col
+        >
+        <ion-col class="column-width"
+          >{{ empleado.primer_nombre + ' ' + empleado.segundo_nombre }}</ion-col
+        >
+        <ion-col class="column-width"
+          >{{ empleado.primer_apellido + ' ' + empleado.segundo_apellido
+          }}</ion-col
+        >
+        <ion-col class="column-width">{{ empleado.mail }}</ion-col>
+        <ion-col class="column-width">{{ empleado.estatus }}</ion-col>
+        <ion-col class="column-width">{{ empleado.cargo }}</ion-col>
+        <ion-col class="column-width">{{ empleado.direccion }}</ion-col>
+        <ion-col class="column-width">{{ empleado.nombre_comuna }}</ion-col>
+        <ion-col class="column-width">{{ empleado.nombre_region }}</ion-col>
+        <ion-col class="column-width">
+          <ion-button (click)="editarEmpleado(empleado)">Editar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<!-- Agrega el modal -->
+<ion-modal [animated]="true" *ngIf="mostrarModal">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Editar Empleado</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="cerrarModal()">Cancelar</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <!-- Agrega los campos de edición dentro del modal -->
+    <ion-item *ngIf="empleadoSeleccionado">
+      *ngIf="empleadoSeleccionado"
+      <ion-label>RUT</ion-label>
+      <ion-input [(ngModel)]="empleadoSeleccionado.rut" disabled></ion-input>
+    </ion-item>
+    <ion-item *ngIf="empleadoSeleccionado">
+      <ion-label>Nombres</ion-label>
+      <ion-input [(ngModel)]="empleadoSeleccionado.primer_nombre"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="empleadoSeleccionado">
+      <ion-label>Apellidos</ion-label>
+      <ion-input [(ngModel)]="empleadoSeleccionado.primer_apellido"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="empleadoSeleccionado">
+      <ion-label>Correo</ion-label>
+      <ion-input [(ngModel)]="empleadoSeleccionado.mail"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="empleadoSeleccionado">
+      <ion-label>Estado</ion-label>
+      <ion-select [(ngModel)]="empleadoSeleccionado.estatus">
+        <ion-select-option value="1">Vinculado</ion-select-option>
+        <ion-select-option value="0">Desvinculado</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="empleadoSeleccionado">
+      <ion-label>Cargo</ion-label>
+      <ion-select [(ngModel)]="empleadoSeleccionado.id_cargo">
+        <ion-select-option *ngFor="let cargo of cargos" [value]="cargo.id_cargo"
+          >{{ cargo.cargo }}</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="empleadoSeleccionado">
+      <ion-label>Comuna</ion-label>
+      <ion-select [(ngModel)]="empleadoSeleccionado.id_comuna">
+        <ion-select-option
+          *ngFor="let comuna of comunas"
+          [value]="comuna.id_comuna"
+          >{{ comuna.nombre_comuna }}</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="empleadoSeleccionado">
+      <ion-label>Región</ion-label>
+      <ion-select [(ngModel)]="empleadoSeleccionado.id_region">
+        <ion-select-option
+          *ngFor="let region of regiones"
+          [value]="region.id_region"
+          >{{ region.nombre_region }}</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+    <ion-button (click)="actualizarEmpleado()">Actualizar</ion-button>
+  </ion-content>
+</ion-modal>

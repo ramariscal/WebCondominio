@@ -1,0 +1,90 @@
+<ion-content>
+  <div class="headtext">
+    <h1>Administración de paqueteria:</h1>
+    <p>
+      Bienvenido a la página de administración de los paquetes de los residentes
+      del condominio. Aquí puedes gestionar los detalles de los paquetes
+      registrados.
+    </p>
+  </div>
+  <ion-list>
+    <!-- Agrega un input y un botón para filtrar -->
+    <ion-item>
+      <h3>Tabla de Paquetería:</h3>
+      <div class="casillafiltro">
+        <ion-input placeholder="Ingrese texto de filtro"></ion-input>
+        <ion-button>Filtrar</ion-button>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-row class="encabezado">
+        <ion-col class="column-width"><strong>ID</strong></ion-col>
+        <ion-col class="column-width"><strong>RECEPCIÓN</strong></ion-col>
+        <ion-col class="column-width"><strong>ENTREGA</strong></ion-col>
+        <ion-col class="column-width"><strong>EVI. RECEP.</strong></ion-col>
+        <ion-col class="column-width"><strong>EVI. ENTR.</strong></ion-col>
+        <ion-col class="column-width"><strong>DEPTO.</strong></ion-col>
+        <ion-col class="column-width"><strong>CONDOMINIO</strong></ion-col>
+        <ion-col class="column-width"><strong>USU. R.</strong></ion-col>
+        <ion-col class="column-width"><strong>USU. E.</strong></ion-col>
+        <ion-col class="column-width"><strong>EVIDENCIA</strong></ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-item *ngFor="let paqueteria of paqueterias">
+      <ion-row>
+        <ion-col class="column-width">{{ paqueteria.id_pedido }}</ion-col>
+        <ion-col class="column-width"
+          >{{ formatDate(paqueteria.fecha_recepcion) }}</ion-col
+        >
+        <ion-col class="column-width"
+          >{{ formatDate(paqueteria.fecha_entrega) }}</ion-col
+        >
+        <ion-col class="column-width" *ngIf="paqueteria.evidencia_recepcion">
+          <ion-icon name="ticket" style="color: green"></ion-icon>
+        </ion-col>
+        <ion-col class="column-width" *ngIf="!paqueteria.evidencia_recepcion">
+          <ion-icon name="close" style="color: red"></ion-icon>
+        </ion-col>
+        <ion-col class="column-width" *ngIf="paqueteria.evidencia_entrega">
+          <ion-icon name="ticket" style="color: green"></ion-icon>
+        </ion-col>
+        <ion-col class="column-width" *ngIf="!paqueteria.evidencia_entrega">
+          <ion-icon name="close" style="color: red"></ion-icon>
+        </ion-col>
+        <ion-col class="column-width">
+          {{ "D: " + paqueteria.id_departamento + " T: " +
+          paqueteria.id_edificio }}
+        </ion-col>
+        <ion-col class="column-width">{{ paqueteria.nombre_conjunto }}</ion-col>
+        <ion-col class="column-width">{{ paqueteria.rut_empleado }}</ion-col>
+        <ion-col class="column-width"
+          >{{ paqueteria.rut_empleado_ent }}</ion-col
+        >
+        <ion-col class="column-width">
+          <ion-button (click)="generarPDF()">EXPORTAR</ion-button>
+          <ion-button (click)="openModal(paqueteria)">Foto</ion-button>
+          <ion-button (click)="evidencia(paqueteria)">Evidencia</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+  <!-- Modal -->
+  <ion-modal [animated]="true" [backdropDismiss]="!showModal">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Detalles de la Paquetería</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="closeModal()">Cerrar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <!-- Mostrar los detalles de selectedPaqueteria aquí -->
+      <ion-list>
+        <ion-item>Hola</ion-item>
+        <!-- Agrega más detalles según tus necesidades -->
+      </ion-list>
+    </ion-content>
+  </ion-modal>
+</ion-content>

@@ -1,0 +1,485 @@
+<ion-content [fullscreen]="true">
+  <div class="headtext">
+    <h1>Gestion del condominio:</h1>
+    <p>
+      Bienvenido a la página de gestión del condominio. Aquí puedes agregar
+      nuevos empleados, nuevos residentes y también nuevo auto para un
+      residente.
+    </p>
+  </div>
+  <ion-segment (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="empleados" checked>
+      Empleados
+    </ion-segment-button>
+    <ion-segment-button value="personas"> Residentes </ion-segment-button>
+    <ion-segment-button value="vehiculos"> Vehículos </ion-segment-button>
+  </ion-segment>
+
+  <ng-container *ngIf="selectedSegment === 'empleados'">
+    <!-- Formulario para ingresar empleado -->
+    <ion-card>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>RUT:</ion-label>
+          <ion-input
+            placeholder="Ingrese RUT"
+            [(ngModel)]="persona.rut"
+          ></ion-input>
+          <ion-input
+            placeholder="Ingrese DV"
+            [(ngModel)]="persona.dv"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>NOMBRES:</ion-label>
+          <ion-input
+            placeholder="Primer nombre"
+            [(ngModel)]="persona.primerNombre"
+          ></ion-input>
+          <ion-input
+            placeholder="Segundo nombre"
+            [(ngModel)]="persona.segundoNombre"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>APELLIDOS:</ion-label>
+          <ion-input
+            placeholder="Primer apellido"
+            [(ngModel)]="persona.primerApellido"
+          ></ion-input>
+          <ion-input
+            placeholder="Segundo apellido"
+            [(ngModel)]="persona.segundoApellido"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>CORREO:</ion-label>
+          <ion-input
+            placeholder="Ingrese correo"
+            [(ngModel)]="persona.correo"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>DIRECCIÓN:</ion-label>
+          <ion-input
+            placeholder="Ingrese dirección"
+            [(ngModel)]="empleado.direccion"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>REGIÓN:</ion-label>
+          <ion-select [(ngModel)]="empleado.region">
+            <ion-select-option value="Arica y Parinacota"
+              >Arica y Parinacota</ion-select-option
+            >
+            <ion-select-option value="Tarapacá">Tarapacá</ion-select-option>
+            <ion-select-option value="Antofagasta"
+              >Antofagasta</ion-select-option
+            >
+            <ion-select-option value="Atacama">Atacama</ion-select-option>
+            <ion-select-option value="Coquimbo">Coquimbo</ion-select-option>
+            <ion-select-option value="Valparaíso">Valparaíso</ion-select-option>
+            <ion-select-option value="Metropolitana de Santiago"
+              >Metropolitana de Santiago</ion-select-option
+            >
+            <ion-select-option value="Libertador General Bernardo O'Higgins"
+              >Libertador General Bernardo O'Higgins</ion-select-option
+            >
+            <ion-select-option value="Maule">Maule</ion-select-option>
+            <ion-select-option value="Ñuble">Ñuble</ion-select-option>
+            <ion-select-option value="Biobío">Biobío</ion-select-option>
+            <ion-select-option value="Araucanía">Araucanía</ion-select-option>
+            <ion-select-option value="Los Ríos">Los Ríos</ion-select-option>
+            <ion-select-option value="Los Lagos">Los Lagos</ion-select-option>
+            <ion-select-option value="Aysén del General Carlos Ibáñez del Campo"
+              >Aysén del General Carlos Ibáñez del Campo</ion-select-option
+            >
+            <ion-select-option value="Magallanes y de la Antártica Chilena"
+              >Magallanes y de la Antártica Chilena</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>COMUNA:</ion-label>
+          <ion-select [(ngModel)]="persona.comuna">
+            <ion-select-option value="Alhué">Alhué</ion-select-option>
+            <ion-select-option value="Buin">Buin</ion-select-option>
+            <ion-select-option value="Calera de Tango"
+              >Calera de Tango</ion-select-option
+            >
+            <ion-select-option value="Cerrillos">Cerrillos</ion-select-option>
+            <ion-select-option value="Cerro Navia"
+              >Cerro Navia</ion-select-option
+            >
+            <ion-select-option value="Colonia">Colonia</ion-select-option>
+            <ion-select-option value="Conchalí">Conchalí</ion-select-option>
+            <ion-select-option value="Curacaví">Curacaví</ion-select-option>
+            <ion-select-option value="El Bosque">El Bosque</ion-select-option>
+            <ion-select-option value="El Monte">El Monte</ion-select-option>
+            <ion-select-option value="Estación Central"
+              >Estación Central</ion-select-option
+            >
+            <ion-select-option value="Huechuraba">Huechuraba</ion-select-option>
+            <ion-select-option value="Independencia"
+              >Independencia</ion-select-option
+            >
+            <ion-select-option value="Isla de Maipo"
+              >Isla de Maipo</ion-select-option
+            >
+            <ion-select-option value="La Cisterna"
+              >La Cisterna</ion-select-option
+            >
+            <ion-select-option value="La Florida">La Florida</ion-select-option>
+            <ion-select-option value="La Granja">La Granja</ion-select-option>
+            <ion-select-option value="Lampa">Lampa</ion-select-option>
+            <ion-select-option value="La Pintana">La Pintana</ion-select-option>
+            <ion-select-option value="La Reina">La Reina</ion-select-option>
+            <ion-select-option value="Las Condes">Las Condes</ion-select-option>
+            <ion-select-option value="Lo Barnechea"
+              >Lo Barnechea</ion-select-option
+            >
+            <ion-select-option value="Lo Espejo">Lo Espejo</ion-select-option>
+            <ion-select-option value="Lo Prado">Lo Prado</ion-select-option>
+            <ion-select-option value="Macul">Macul</ion-select-option>
+            <ion-select-option value="Maipú">Maipú</ion-select-option>
+            <ion-select-option value="María Pinto"
+              >María Pinto</ion-select-option
+            >
+            <ion-select-option value="Melipilla">Melipilla</ion-select-option>
+            <ion-select-option value="Ñuñoa">Ñuñoa</ion-select-option>
+            <ion-select-option value="Padre Hurtado"
+              >Padre Hurtado</ion-select-option
+            >
+            <ion-select-option value="Paine">Paine</ion-select-option>
+            <ion-select-option value="Pedro Aguirre Cerda"
+              >Pedro Aguirre Cerda</ion-select-option
+            >
+            <ion-select-option value="Peñaflor">Peñaflor</ion-select-option>
+            <ion-select-option value="Peñalolén">Peñalolén</ion-select-option>
+            <ion-select-option value="Pirque">Pirque</ion-select-option>
+            <ion-select-option value="Providencia"
+              >Providencia</ion-select-option
+            >
+            <ion-select-option value="Pudahuel">Pudahuel</ion-select-option>
+            <ion-select-option value="Puente Alto"
+              >Puente Alto</ion-select-option
+            >
+            <ion-select-option value="Quilicura">Quilicura</ion-select-option>
+            <ion-select-option value="Quinta Normal"
+              >Quinta Normal</ion-select-option
+            >
+            <ion-select-option value="Recoleta">Recoleta</ion-select-option>
+            <ion-select-option value="Renca">Renca</ion-select-option>
+            <ion-select-option value="San Bernardo"
+              >San Bernardo</ion-select-option
+            >
+            <ion-select-option value="San Joaquín"
+              >San Joaquín</ion-select-option
+            >
+            <ion-select-option value="San José de Maipo"
+              >San José de Maipo</ion-select-option
+            >
+            <ion-select-option value="San Miguel">San Miguel</ion-select-option>
+            <ion-select-option value="San Pedro">San Pedro</ion-select-option>
+            <ion-select-option value="San Ramón">San Ramón</ion-select-option>
+            <ion-select-option value="Santiago">Santiago</ion-select-option>
+            <ion-select-option value="Talagante">Talagante</ion-select-option>
+            <ion-select-option value="Tiltil">Tiltil</ion-select-option>
+            <ion-select-option value="Vitacura">Vitacura</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>CONDOMINIO:</ion-label>
+          <ion-select [(ngModel)]="persona.condominio">
+            <ion-select-option value="Lomas del Parque"
+              >Lomas del Parque</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>CARGO EMPLEADO:</ion-label>
+          <ion-select [(ngModel)]="empleado.cargoEmpleado">
+            <ion-select-option value="Guardia">Guardia</ion-select-option>
+            <ion-select-option value="Aseo">Aseo</ion-select-option>
+            <ion-select-option value="Jardinero">Jardinero</ion-select-option>
+            <ion-select-option value="Administrador"
+              >Administrador</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+
+        <ion-button expand="full" (click)="guardarEmpleado()"
+          >Guardar</ion-button
+        >
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <ng-container *ngIf="selectedSegment === 'personas'">
+    <!-- Formulario para ingresar personas -->
+    <ion-card>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>RUT:</ion-label>
+          <ion-input
+            placeholder="Ingrese RUT"
+            [(ngModel)]="persona.rut"
+          ></ion-input>
+          <ion-input
+            placeholder="Ingrese DV"
+            [(ngModel)]="persona.dv"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>NOMBRES:</ion-label>
+          <ion-input
+            placeholder="Primer nombre"
+            [(ngModel)]="persona.primerNombre"
+          ></ion-input>
+          <ion-input
+            placeholder="Segundo nombre"
+            [(ngModel)]="persona.segundoNombre"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>APELLIDOS:</ion-label>
+          <ion-input
+            placeholder="Primer apellido"
+            [(ngModel)]="persona.primerApellido"
+          ></ion-input>
+          <ion-input
+            placeholder="Segundo apellido"
+            [(ngModel)]="persona.segundoApellido"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>CORREO:</ion-label>
+          <ion-input
+            placeholder="Ingrese correo"
+            [(ngModel)]="persona.correo"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>TIPO:</ion-label>
+          <ion-select [(ngModel)]="persona.tipo">
+            <ion-select-option value="Propietario"
+              >Propietario</ion-select-option
+            >
+            <ion-select-option value="Arrendatario"
+              >Arrendatario</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>CONDOMINIO:</ion-label>
+          <ion-select [(ngModel)]="persona.condominio">
+            <ion-select-option value="Lomas del Parque"
+              >Lomas del Parque</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>TORRE:</ion-label>
+          <ion-select [(ngModel)]="persona.torre">
+            <ion-select-option value="Torre 1">Torre 1</ion-select-option>
+            <ion-select-option value="Torre 2">Torre 2</ion-select-option>
+            <ion-select-option value="Torre 3">Torre 3</ion-select-option>
+            <ion-select-option value="Torre 4">Torre 4</ion-select-option>
+            <ion-select-option value="Torre 5">Torre 5</ion-select-option>
+            <ion-select-option value="Torre 6">Torre 6</ion-select-option>
+            <ion-select-option value="Torre 7">Torre 7</ion-select-option>
+            <ion-select-option value="Torre 8">Torre 8</ion-select-option>
+            <ion-select-option value="Torre 9">Torre 9</ion-select-option>
+            <ion-select-option value="Torre 10">Torre 10</ion-select-option>
+            <ion-select-option value="Torre 11">Torre 11</ion-select-option>
+            <ion-select-option value="Torre 12">Torre 12</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>DEPTO:</ion-label>
+          <ion-select [(ngModel)]="persona.depto">
+            <ion-select-option value="201">201</ion-select-option>
+            <ion-select-option value="202">202</ion-select-option>
+            <ion-select-option value="203">203</ion-select-option>
+            <ion-select-option value="204">204</ion-select-option>
+            <ion-select-option value="205">205</ion-select-option>
+            <ion-select-option value="206">206</ion-select-option>
+            <ion-select-option value="207">207</ion-select-option>
+            <ion-select-option value="208">208</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button expand="full" (click)="guardarPersona()"
+          >Guardar</ion-button
+        >
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <ng-container *ngIf="selectedSegment === 'vehiculos'">
+    <!-- Formulario para ingresar vehículos -->
+    <ion-card *ngIf="!patenteIngresada">
+      <ion-card-content>
+        <ion-item>
+          <ion-label>PATENTE:</ion-label>
+          <ion-input
+            placeholder="Ingrese patente"
+            [(ngModel)]="vehiculo.patente"
+          ></ion-input>
+        </ion-item>
+        <ion-button expand="full" (click)="buscarVehiculo()">Buscar</ion-button>
+      </ion-card-content>
+    </ion-card>
+    <!-- Formulario para editar vehículos -->
+    <ion-card *ngIf="patenteIngresada && mostrarFormularioEditar">
+      <ion-card-content>
+        <ion-item>
+          <ion-label>PATENTE:</ion-label>
+          <ion-input [(ngModel)]="vehiculo.patente" readonly></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>TIPO:</ion-label>
+          <ion-input [(ngModel)]="vehiculo.tipo" readonly></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>COLOR:</ion-label>
+          <ion-select [(ngModel)]="vehiculo.color">
+            <ion-select-option value="azul">Azul</ion-select-option>
+            <ion-select-option value="rojo">Rojo</ion-select-option>
+            <ion-select-option value="amarillo">Amarillo</ion-select-option>
+            <ion-select-option value="gris">Gris</ion-select-option>
+            <ion-select-option value="negro">Negro</ion-select-option>
+            <ion-select-option value="blanco">Blanco</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>ESTADO:</ion-label>
+          <ion-select [(ngModel)]="vehiculo.estado">
+            <ion-select-option value="activo">Activo</ion-select-option>
+            <ion-select-option value="inactivo">Inactivo</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>RESIDENTE:</ion-label>
+          <ion-input [(ngModel)]="vehiculo.residente" readonly></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>DEPTO:</ion-label>
+          <ion-input [(ngModel)]="vehiculo.depto" readonly></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>ESTACIONAMIENTO:</ion-label>
+          <ion-input
+            [(ngModel)]="vehiculo.estacionamiento"
+            readonly
+          ></ion-input>
+        </ion-item>
+        <ion-button expand="full" (click)="guardarCambios()"
+          >Actualizar</ion-button
+        >
+      </ion-card-content>
+    </ion-card>
+    <!-- Formulario para agregar vehículos -->
+    <ion-card *ngIf="patenteIngresada && !mostrarFormularioEditar">
+      <ion-card-content>
+        <ion-item>
+          <ion-label>PATENTE:</ion-label>
+          <ion-input readonly>{{ vehiculo.patente }}</ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>TIPO VEHICULO:</ion-label>
+          <ion-select [(ngModel)]="vehiculo.tipoVehiculo">
+            <ion-select-option value="Sedán">Sedán</ion-select-option>
+            <ion-select-option value="SUV">SUV</ion-select-option>
+            <ion-select-option value="4X4">4X4</ion-select-option>
+            <ion-select-option value="Pick-up">Pick-up</ion-select-option>
+            <ion-select-option value="Moto">Moto</ion-select-option>
+            <ion-select-option value="MiniVan">MiniVan</ion-select-option>
+            <ion-select-option value="Furgón">Furgón</ion-select-option>
+            <ion-select-option value="Hatchback">Hatchback</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>COLOR:</ion-label>
+          <ion-select [(ngModel)]="vehiculo.color">
+            <ion-select-option value="azul">Azul</ion-select-option>
+            <ion-select-option value="rojo">Rojo</ion-select-option>
+            <ion-select-option value="amarillo">Amarillo</ion-select-option>
+            <ion-select-option value="gris">Gris</ion-select-option>
+            <ion-select-option value="negro">Negro</ion-select-option>
+            <ion-select-option value="blanco">Blanco</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>CONDOMINIO:</ion-label>
+          <ion-select [(ngModel)]="vehiculo.condominio">
+            <ion-select-option value="Lomas del Parque"
+              >Lomas del Parque</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>TORRE:</ion-label>
+          <ion-select [(ngModel)]="vehiculo.torre">
+            <ion-select-option value="Torre 1">Torre 1</ion-select-option>
+            <ion-select-option value="Torre 2">Torre 2</ion-select-option>
+            <ion-select-option value="Torre 3">Torre 3</ion-select-option>
+            <ion-select-option value="Torre 4">Torre 4</ion-select-option>
+            <ion-select-option value="Torre 5">Torre 5</ion-select-option>
+            <ion-select-option value="Torre 6">Torre 6</ion-select-option>
+            <ion-select-option value="Torre 7">Torre 7</ion-select-option>
+            <ion-select-option value="Torre 8">Torre 8</ion-select-option>
+            <ion-select-option value="Torre 9">Torre 9</ion-select-option>
+            <ion-select-option value="Torre 10">Torre 10</ion-select-option>
+            <ion-select-option value="Torre 11">Torre 11</ion-select-option>
+            <ion-select-option value="Torre 12">Torre 12</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>DEPTO:</ion-label>
+          <ion-select [(ngModel)]="vehiculo.depto">
+            <ion-select-option value="201">201</ion-select-option>
+            <ion-select-option value="202">202</ion-select-option>
+            <ion-select-option value="203">203</ion-select-option>
+            <ion-select-option value="204">204</ion-select-option>
+            <ion-select-option value="205">205</ion-select-option>
+            <ion-select-option value="206">206</ion-select-option>
+            <ion-select-option value="207">207</ion-select-option>
+            <ion-select-option value="208">208</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>RESIDENTE:</ion-label>
+          <ion-select [(ngModel)]="vehiculo.residente">
+            <ion-select-option value="Pedro Martinez"
+              >Pedro Martinez</ion-select-option
+            >
+            <ion-select-option value="Ana Rojas">Ana Rojas</ion-select-option>
+            <ion-select-option value="Antony Ramirez"
+              >Antony Ramirez</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>ESTACIONAMIENTO:</ion-label>
+          <ion-select [(ngModel)]="vehiculo.estacionamiento">
+            <ion-select-option value="1">1</ion-select-option>
+            <ion-select-option value="2">2</ion-select-option>
+            <ion-select-option value="3">3</ion-select-option>
+            <ion-select-option value="4">4</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button expand="full" (click)="agregarVehiculo()"
+          >Agregar</ion-button
+        >
+      </ion-card-content>
+    </ion-card>
+    <!-- Mensaje de actualización correcta -->
+    <ion-card *ngIf="actualizacionExitosa" color="success">
+      <ion-card-content> Actualización exitosa. </ion-card-content>
+    </ion-card>
+    <!-- Mensaje de actualización correcta -->
+    <ion-card *ngIf="agregadoExitoso" color="success">
+      <ion-card-content> Agregado exitosamente. </ion-card-content>
+    </ion-card>
+  </ng-container>
+</ion-content>

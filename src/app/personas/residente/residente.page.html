@@ -1,0 +1,218 @@
+<ion-content>
+  <div class="headtext">
+    <h1>Administración de Residentes:</h1>
+    <p>
+      Bienvenido a la página de administración de residentes del condominio.
+      Aquí puedes gestionar los detalles de los residentes registrados.
+    </p>
+  </div>
+  <!-- 2 SEGMENTS -->
+  <ion-segment (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="residentes" checked>
+      Residentes
+    </ion-segment-button>
+    <ion-segment-button value="vehiculos"> Vehículos </ion-segment-button>
+  </ion-segment>
+
+  <ion-list *ngIf="selectedSegment === 'residentes'">
+    <!-- Agrega un input y un botón para filtrar -->
+    <ion-item>
+      <h3>Tabla de Residentes:</h3>
+      <ion-input
+        class="casillafiltro"
+        placeholder="Ingrese texto de filtro"
+      ></ion-input>
+      <ion-button>Filtrar</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-row class="encabezado">
+        <ion-col class="column-width"><strong>RUT</strong></ion-col>
+        <ion-col class="column-width"><strong>NOMBRE(S)</strong></ion-col>
+        <ion-col class="column-width"><strong>APELLIDO(S)</strong></ion-col>
+        <ion-col class="column-width"><strong>CORREO</strong></ion-col>
+        <ion-col class="column-width"><strong>TIPO</strong></ion-col>
+        <ion-col class="column-width"><strong>ESTADO</strong></ion-col>
+        <ion-col class="column-width"><strong>DEPTO</strong></ion-col>
+        <ion-col class="column-width"><strong>CONDOMINIO</strong></ion-col>
+        <ion-col class="column-width"><strong>ACCIÓN</strong></ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item *ngFor="let residente of residentes">
+      <ion-row>
+        <ion-col class="column-width">
+          <div *ngIf="!edicionActiva">
+            {{ residente.rut }}-{{ residente.dv }}
+          </div>
+          <div
+            *ngIf="edicionActiva && residenteEditando === residente"
+            class="input-container"
+          >
+            <ion-item lines="none">
+              <ion-input [(ngModel)]="residente.rut"></ion-input>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-input [(ngModel)]="residente.dv"></ion-input>
+            </ion-item>
+          </div>
+        </ion-col>
+
+        <ion-col class="column-width">
+          <div
+            [style.height.px]="!edicionActiva ? 'auto' : 'inherit'"
+            *ngIf="!edicionActiva"
+          >
+            {{ residente.primer_nombre + ' ' + residente.segundo_nombre }}
+          </div>
+          <div
+            *ngIf="edicionActiva && residenteEditando === residente"
+            class="input-container"
+          >
+            <ion-item [lines]="edicionActiva ? 'none' : 'default'">
+              <ion-input
+                [(ngModel)]="residente.primer_nombre"
+                #primerNombreInput
+              ></ion-input>
+            </ion-item>
+            <ion-item [lines]="edicionActiva ? 'none' : 'default'">
+              <ion-input
+                [(ngModel)]="residente.segundo_nombre"
+                #segundoNombreInput
+              ></ion-input>
+            </ion-item>
+          </div>
+        </ion-col>
+
+        <ion-col class="column-width">
+          <div
+            [style.height.px]="!edicionActiva ? 'auto' : 'inherit'"
+            *ngIf="!edicionActiva"
+          >
+            {{ residente.primer_apellido + ' ' + residente.segundo_apellido }}
+          </div>
+          <div
+            *ngIf="edicionActiva && residenteEditando === residente"
+            class="input-container"
+          >
+            <ion-item [lines]="edicionActiva ? 'none' : 'default'">
+              <ion-input
+                [(ngModel)]="residente.primer_apellido"
+                #primerApellidoInput
+              ></ion-input>
+            </ion-item>
+            <ion-item [lines]="edicionActiva ? 'none' : 'default'">
+              <ion-input
+                [(ngModel)]="residente.segundo_apellido"
+                #segundoApellidoInput
+              ></ion-input>
+            </ion-item>
+          </div>
+        </ion-col>
+        <ion-col class="column-width">
+          <div *ngIf="!edicionActiva">{{ residente.mail }}</div>
+          <ion-input
+            *ngIf="edicionActiva && residenteEditando === residente"
+            [(ngModel)]="residente.mail"
+          ></ion-input>
+        </ion-col>
+        <ion-col class="column-width">
+          <div *ngIf="!edicionActiva">{{ residente.tip_per }}</div>
+          <ion-input
+            *ngIf="edicionActiva && residenteEditando === residente"
+            [(ngModel)]="residente.id_tipo_persona"
+          ></ion-input>
+        </ion-col>
+        <ion-col class="column-width">
+          <div *ngIf="!edicionActiva">{{ residente.estado }}</div>
+          <ion-input
+            *ngIf="edicionActiva && residenteEditando === residente"
+            [(ngModel)]="residente.estado"
+          ></ion-input>
+        </ion-col>
+        <ion-col class="column-width">
+          <div
+            [style.height.px]="!edicionActiva ? 'auto' : 'inherit'"
+            *ngIf="!edicionActiva"
+          >
+            {{ 'D: ' + residente.id_departamento + ' T: ' +
+            residente.id_edificio }}
+          </div>
+          <div
+            *ngIf="edicionActiva && residenteEditando === residente"
+            class="input-container"
+          >
+            <ion-item [lines]="edicionActiva ? 'none' : 'default'">
+              <ion-input
+                [(ngModel)]="residente.id_departamento"
+                #idDepartamentoInput
+              ></ion-input>
+            </ion-item>
+            <ion-item [lines]="edicionActiva ? 'none' : 'default'">
+              <ion-input
+                [(ngModel)]="residente.id_edificio"
+                #idEdificioInput
+              ></ion-input>
+            </ion-item>
+          </div>
+        </ion-col>
+        <ion-col class="column-width">
+          <div *ngIf="!edicionActiva">{{ residente.nombre_conjunto }}</div>
+          <ion-input
+            *ngIf="edicionActiva && residenteEditando === residente"
+            [(ngModel)]="residente.id_conjunto"
+          ></ion-input>
+        </ion-col>
+        <ion-col class="column-width">
+          <ion-button *ngIf="!edicionActiva" (click)="activarEdicion(residente)"
+            >Editar</ion-button
+          >
+          <ion-button
+            *ngIf="edicionActiva && residenteEditando === residente"
+            (click)="guardarCambios(residente)"
+            >Guardar</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="selectedSegment === 'vehiculos'">
+    <!-- Agrega un input y un botón para filtrar -->
+    <ion-item>
+      <h3>Tabla de Vehículos:</h3>
+      <ion-input
+        class="casillafiltro"
+        placeholder="Ingrese texto de filtro"
+      ></ion-input>
+      <ion-button>Filtrar</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-row class="encabezado">
+        <ion-col class="column-width"><strong>PATENTE</strong></ion-col>
+        <ion-col class="column-width"><strong>TIPO</strong></ion-col>
+        <ion-col class="column-width"><strong>COLOR</strong></ion-col>
+        <ion-col class="column-width"><strong>PROPIETARIO</strong></ion-col>
+        <ion-col class="column-width"><strong>RUT</strong></ion-col>
+        <ion-col class="column-width"><strong>DEPTO</strong></ion-col>
+        <ion-col class="column-width"><strong>ESTACIONAMIENTO</strong></ion-col>
+        <ion-col class="column-width"><strong>CONDOMINIO</strong></ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item *ngFor="let vehiculo of vehiculos">
+      <ion-row>
+        <ion-col class="column-width"> {{ vehiculo.patente }}</ion-col>
+        <ion-col class="column-width"> {{ vehiculo.tipo_veh }}</ion-col>
+        <ion-col class="column-width"> {{ vehiculo.color_veh }} </ion-col>
+        <ion-col class="column-width">
+          {{ vehiculo.primer_nombre + " " + vehiculo.primer_apellido }}
+        </ion-col>
+        <ion-col class="column-width">
+          {{ vehiculo.rut + "-" + vehiculo.dv }}
+        </ion-col>
+        <ion-col class="column-width">
+          {{ "D: " + vehiculo.id_departamento + " T: " + vehiculo.id_edificio }}
+        </ion-col>
+        <ion-col class="column-width"> {{ vehiculo.id_est }} </ion-col>
+        <ion-col class="column-width"> {{ vehiculo.nombre_conjunto }}</ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>

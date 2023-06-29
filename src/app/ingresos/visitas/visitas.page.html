@@ -1,0 +1,50 @@
+<ion-content>
+  <div class="headtext">
+    <h1>Administración de visitas:</h1>
+    <p>
+      Bienvenido a la página de administración de visitas del condominio. Aquí
+      puedes gestionar los detalles de las visitas registrados.
+    </p>
+  </div>
+  <ion-list>
+    <!-- Agrega un input y un botón para filtrar -->
+    <ion-item>
+      <h3>Tabla de Visitas:</h3>
+      <ion-input
+        class="casillafiltro"
+        placeholder="Ingrese texto de filtro"
+      ></ion-input>
+      <ion-button>Filtrar</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-row class="encabezado">
+        <ion-col class="column-width"><strong>RUT</strong></ion-col>
+        <ion-col class="column-width"><strong>NOMBRE</strong></ion-col>
+        <ion-col class="column-width"><strong>APELLIDO</strong></ion-col>
+        <ion-col class="column-width"><strong>PATENTE</strong></ion-col>
+        <ion-col class="column-width"><strong>ESTACIONAMIENTO</strong></ion-col>
+        <ion-col class="column-width"><strong>DEPTO</strong></ion-col>
+        <ion-col class="column-width"><strong>INGRESO</strong></ion-col>
+        <ion-col class="column-width"><strong>SALIDA</strong></ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-item *ngFor="let visita of visita">
+      <ion-row>
+        <ion-col class="column-width"
+          >{{ visita.rut_visita + '-' + visita.dv }}</ion-col
+        >
+        <ion-col class="column-width">{{ visita.nombre }}</ion-col>
+        <ion-col class="column-width">{{ visita.apellido }}</ion-col>
+        <ion-col class="column-width">{{ visita.patente }}</ion-col>
+        <ion-col class="column-width">{{ visita.id_est }}</ion-col>
+        <ion-col class="column-width"
+          >{{ 'D: ' + visita.id_departamento + ' T: ' + visita.id_edificio
+          }}</ion-col
+        >
+        <ion-col class="column-width">{{ visita.fecha_ing }}</ion-col>
+        <ion-col class="column-width">{{ visita.fecha_sal }}</ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,76 @@
+ion-content {
+  ion-segment {
+    margin-bottom: 20px;
+    
+    ion-segment-button {
+      // Estilos para los botones del segmento
+    }
+  }
+
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 50px);
+  }
+
+  ion-card {
+    width: 60%;
+    max-width: 50%;
+    margin: 0 auto;
+
+    ion-card-content {
+      ion-item {
+        margin-bottom: 10px;
+
+        ion-label {
+          width: 100px;
+          text-align: right;
+          margin-right: 10px;
+        }
+
+        ion-input {
+          // Estilos para los inputs
+        }
+      }
+
+      ion-button {
+        margin-top: 10px;
+        width: 40%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+
+  .headtext {
+    margin: 0 0 0 2%;
+  }
+
+  ion-card {
+    ion-item {
+      ion-label {
+        text-align: left;
+        white-space: normal;
+        overflow: visible;
+      }
+
+      ion-input {
+        --padding-start: 0;
+      }
+
+      ion-select {
+        --padding-start: 0;
+        --placeholder-color: transparent; // Oculta el texto de selección por defecto
+
+        .select-text {
+          text-align: center;
+        }
+
+        ion-select-option {
+          text-align: left;
+        }
+      }
+    }
+  }
+}

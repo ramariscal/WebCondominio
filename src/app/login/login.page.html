@@ -1,0 +1,37 @@
+<ion-content [fullscreen]="true" class="login-content ion-text-center">
+  <div class="login-wrapper container ion-align-items-center">
+    <ion-card class="login-card">
+      <ion-card-content>
+        <h1>Bienvenido</h1>
+        <p>Ingresa con tus credenciales</p>
+        <form (ngSubmit)="login()" class="login-form">
+          <ion-item class="login-item">
+            <ion-label position="floating" class="login-label"
+              >Usuario</ion-label
+            >
+            <ion-input
+              type="text"
+              [(ngModel)]="username"
+              name="username"
+              class="login-input"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item class="login-item">
+            <ion-label position="floating" class="login-label">Clave</ion-label>
+            <ion-input
+              type="password"
+              [(ngModel)]="password"
+              name="password"
+              class="login-input"
+            ></ion-input>
+          </ion-item>
+
+          <ion-button expand="full" type="submit" class="login-button"
+            >Iniciar sesión</ion-button
+          >
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

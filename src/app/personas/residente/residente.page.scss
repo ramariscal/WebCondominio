@@ -1,0 +1,45 @@
+ion-content{
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+ion-list{
+flex: 1;
+}
+
+ion-iten{
+    flex: 1;
+}
+ion-row{
+    flex: 1;
+}
+
+.column-width{
+        max-width: 100%;
+        display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px;
+    border-color: red;
+}
+.encabezado{
+    background-color: var(--ion-color-mycolor);
+}
+.headtext{
+    margin: 0 0 0 2%;
+}
+
+.casillafiltro{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 20%;
+}
+h3{
+    margin: 0 2%;
+}

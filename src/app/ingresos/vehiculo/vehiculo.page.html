@@ -1,0 +1,54 @@
+<ion-content>
+  <div class="headtext">
+    <h1>Administración de vehiculos de visitas:</h1>
+    <p>
+      Bienvenido a la página de administración de los vehiculos de los
+      visitantes de condominio. Aquí puedes gestionar los detalles de los
+      vehiculos de visitas registrados.
+    </p>
+  </div>
+  <ion-list>
+    <!-- Agrega un input y un botón para filtrar -->
+    <ion-item>
+      <h3>Tabla de Vehículo de visitas:</h3>
+      <ion-input
+        class="casillafiltro"
+        placeholder="Ingrese texto de filtro"
+      ></ion-input>
+      <ion-button>Filtrar</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-row class="encabezado">
+        <ion-col class="column-width"><strong>PATENTE</strong></ion-col>
+        <ion-col class="column-width"><strong>TIPO</strong></ion-col>
+        <ion-col class="column-width"><strong>COLOR</strong></ion-col>
+        <ion-col class="column-width"><strong>NOMBRE</strong></ion-col>
+        <ion-col class="column-width"><strong>APELLIDO</strong></ion-col>
+        <ion-col class="column-width"><strong>DEPTO</strong></ion-col>
+        <ion-col class="column-width"><strong>ESTACIONAMIENTO</strong></ion-col>
+        <ion-col class="column-width"><strong>INGRESO</strong></ion-col>
+        <ion-col class="column-width"><strong>SALIDA</strong></ion-col>
+        <ion-col class="column-width"><strong>TIEMPO VISITA</strong></ion-col>
+        <ion-col class="column-width"><strong>MULTAS</strong></ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-item *ngFor="let vehiculo of vehiculo">
+      <ion-row>
+        <ion-col class="column-width">{{ vehiculo.patente }}</ion-col>
+        <ion-col class="column-width">{{ vehiculo.tipo_veh }}</ion-col>
+        <ion-col class="column-width">{{ vehiculo.color_veh }}</ion-col>
+        <ion-col class="column-width">{{ vehiculo.primer_nombre }}</ion-col>
+        <ion-col class="column-width">{{ vehiculo.primer_apellido }}</ion-col>
+        <ion-col class="column-width">{{ vehiculo.id_departamento }}</ion-col>
+        <ion-col class="column-width"
+          >{{ vehiculo.id_est + " " + vehiculo.tipo_est }}</ion-col
+        >
+        <ion-col class="column-width">{{ vehiculo.fecha_ing }}</ion-col>
+        <ion-col class="column-width">{{ vehiculo.fecha_sal }}</ion-col>
+        <ion-col class="column-width">{{ vehiculo.tiempo_visita }}</ion-col>
+        <ion-col class="column-width">{{ vehiculo.veh_multa }}</ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>
