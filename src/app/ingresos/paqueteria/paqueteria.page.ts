@@ -36,12 +36,31 @@ export class PaqueteriaPage implements OnInit {
     this.paqueteriaService.mostrarPaqueterias().subscribe(
       (data) => {
         this.paqueterias = data;
+        this.selectedPaqueteria = data; // Asigna los datos a selectedPaqueteria
       },
       (error) => {
         console.error('Error al obtener paqueterias:', error);
       }
     );
   }
+
+  
+  exportarPaqueteria(paqueteria: any) {
+    this.selectedPaqueteria = [{...paqueteria}]; // Crea un arreglo con una copia del objeto JSON
+    this.pdfService.generarPDF(this.selectedPaqueteria).subscribe(
+      (blob: Blob) => {
+        const blobURL = URL.createObjectURL(blob);
+        window.open(blobURL); // Abre una nueva pestaña con el PDF
+      },
+      (error) => {
+        console.error('Error al generar el PDF', error);
+      }
+    );
+  }
+    
+  
+  
+  
 
   formatDate(dateString: string): string {
     const date = new Date(dateString);
@@ -75,7 +94,7 @@ export class PaqueteriaPage implements OnInit {
   }
 
   generarPDF() {
-    this.pdfService.generarPDF(this.paqueterias).subscribe(
+    this.pdfService.generarPDF(this.selectedPaqueteria).subscribe(
       (blob: Blob) => {
         const blobURL = URL.createObjectURL(blob);
         window.open(blobURL); // Abre una nueva pestaña con el PDF
@@ -85,4 +104,6 @@ export class PaqueteriaPage implements OnInit {
       }
     );
   }
+  
+  
 }

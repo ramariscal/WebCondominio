@@ -62,7 +62,9 @@
           >{{ paqueteria.rut_empleado_ent }}</ion-col
         >
         <ion-col class="column-width">
-          <ion-button (click)="generarPDF()">EXPORTAR</ion-button>
+          <ion-button (click)="exportarPaqueteria(paqueteria)">
+            Exportar
+          </ion-button>
           <ion-button (click)="openModal(paqueteria)">Foto</ion-button>
           <ion-button (click)="evidencia(paqueteria)">Evidencia</ion-button>
         </ion-col>
