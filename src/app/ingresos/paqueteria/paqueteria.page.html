@@ -41,13 +41,13 @@
           >{{ formatDate(paqueteria.fecha_entrega) }}</ion-col
         >
         <ion-col class="column-width" *ngIf="paqueteria.evidencia_recepcion">
-          <ion-icon name="ticket" style="color: green"></ion-icon>
+          <ion-icon name="checkmark-outline" style="color: green"></ion-icon>
         </ion-col>
         <ion-col class="column-width" *ngIf="!paqueteria.evidencia_recepcion">
           <ion-icon name="close" style="color: red"></ion-icon>
         </ion-col>
         <ion-col class="column-width" *ngIf="paqueteria.evidencia_entrega">
-          <ion-icon name="ticket" style="color: green"></ion-icon>
+          <ion-icon name="checkmark-outline" style="color: green"></ion-icon>
         </ion-col>
         <ion-col class="column-width" *ngIf="!paqueteria.evidencia_entrega">
           <ion-icon name="close" style="color: red"></ion-icon>

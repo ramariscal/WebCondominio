@@ -20,14 +20,12 @@
     <ion-card>
       <ion-card-content>
         <ion-item>
-          <ion-label>RUT:</ion-label>
+          <ion-label>RUT</ion-label>
           <ion-input
-            placeholder="Ingrese RUT"
-            [(ngModel)]="persona.rut"
-          ></ion-input>
-          <ion-input
-            placeholder="Ingrese DV"
-            [(ngModel)]="persona.dv"
+            type="text"
+            [(ngModel)]="rutF"
+            (ionChange)="validarRutDV(rutF)"
+            #rutInput
           ></ion-input>
         </ion-item>
         <ion-item>
@@ -66,144 +64,53 @@
             [(ngModel)]="empleado.direccion"
           ></ion-input>
         </ion-item>
+
         <ion-item>
           <ion-label>REGIÓN:</ion-label>
-          <ion-select [(ngModel)]="empleado.region">
-            <ion-select-option value="Arica y Parinacota"
-              >Arica y Parinacota</ion-select-option
+          <ion-select
+            [(ngModel)]="empleado.region"
+            (ionChange)="buscarComunasPorRegion(empleado.region)"
+          >
+            <ion-select-option
+              *ngFor="let region of regiones"
+              [value]="region.id_region"
             >
-            <ion-select-option value="Tarapacá">Tarapacá</ion-select-option>
-            <ion-select-option value="Antofagasta"
-              >Antofagasta</ion-select-option
-            >
-            <ion-select-option value="Atacama">Atacama</ion-select-option>
-            <ion-select-option value="Coquimbo">Coquimbo</ion-select-option>
-            <ion-select-option value="Valparaíso">Valparaíso</ion-select-option>
-            <ion-select-option value="Metropolitana de Santiago"
-              >Metropolitana de Santiago</ion-select-option
-            >
-            <ion-select-option value="Libertador General Bernardo O'Higgins"
-              >Libertador General Bernardo O'Higgins</ion-select-option
-            >
-            <ion-select-option value="Maule">Maule</ion-select-option>
-            <ion-select-option value="Ñuble">Ñuble</ion-select-option>
-            <ion-select-option value="Biobío">Biobío</ion-select-option>
-            <ion-select-option value="Araucanía">Araucanía</ion-select-option>
-            <ion-select-option value="Los Ríos">Los Ríos</ion-select-option>
-            <ion-select-option value="Los Lagos">Los Lagos</ion-select-option>
-            <ion-select-option value="Aysén del General Carlos Ibáñez del Campo"
-              >Aysén del General Carlos Ibáñez del Campo</ion-select-option
-            >
-            <ion-select-option value="Magallanes y de la Antártica Chilena"
-              >Magallanes y de la Antártica Chilena</ion-select-option
-            >
+              {{ region.nombre_region }}
+            </ion-select-option>
           </ion-select>
         </ion-item>
+
         <ion-item>
           <ion-label>COMUNA:</ion-label>
-          <ion-select [(ngModel)]="persona.comuna">
-            <ion-select-option value="Alhué">Alhué</ion-select-option>
-            <ion-select-option value="Buin">Buin</ion-select-option>
-            <ion-select-option value="Calera de Tango"
-              >Calera de Tango</ion-select-option
+          <ion-select [(ngModel)]="empleado.comuna" name="comuna">
+            <ion-select-option
+              *ngFor="let comuna of comunas"
+              [value]="comuna.id_comuna"
             >
-            <ion-select-option value="Cerrillos">Cerrillos</ion-select-option>
-            <ion-select-option value="Cerro Navia"
-              >Cerro Navia</ion-select-option
-            >
-            <ion-select-option value="Colonia">Colonia</ion-select-option>
-            <ion-select-option value="Conchalí">Conchalí</ion-select-option>
-            <ion-select-option value="Curacaví">Curacaví</ion-select-option>
-            <ion-select-option value="El Bosque">El Bosque</ion-select-option>
-            <ion-select-option value="El Monte">El Monte</ion-select-option>
-            <ion-select-option value="Estación Central"
-              >Estación Central</ion-select-option
-            >
-            <ion-select-option value="Huechuraba">Huechuraba</ion-select-option>
-            <ion-select-option value="Independencia"
-              >Independencia</ion-select-option
-            >
-            <ion-select-option value="Isla de Maipo"
-              >Isla de Maipo</ion-select-option
-            >
-            <ion-select-option value="La Cisterna"
-              >La Cisterna</ion-select-option
-            >
-            <ion-select-option value="La Florida">La Florida</ion-select-option>
-            <ion-select-option value="La Granja">La Granja</ion-select-option>
-            <ion-select-option value="Lampa">Lampa</ion-select-option>
-            <ion-select-option value="La Pintana">La Pintana</ion-select-option>
-            <ion-select-option value="La Reina">La Reina</ion-select-option>
-            <ion-select-option value="Las Condes">Las Condes</ion-select-option>
-            <ion-select-option value="Lo Barnechea"
-              >Lo Barnechea</ion-select-option
-            >
-            <ion-select-option value="Lo Espejo">Lo Espejo</ion-select-option>
-            <ion-select-option value="Lo Prado">Lo Prado</ion-select-option>
-            <ion-select-option value="Macul">Macul</ion-select-option>
-            <ion-select-option value="Maipú">Maipú</ion-select-option>
-            <ion-select-option value="María Pinto"
-              >María Pinto</ion-select-option
-            >
-            <ion-select-option value="Melipilla">Melipilla</ion-select-option>
-            <ion-select-option value="Ñuñoa">Ñuñoa</ion-select-option>
-            <ion-select-option value="Padre Hurtado"
-              >Padre Hurtado</ion-select-option
-            >
-            <ion-select-option value="Paine">Paine</ion-select-option>
-            <ion-select-option value="Pedro Aguirre Cerda"
-              >Pedro Aguirre Cerda</ion-select-option
-            >
-            <ion-select-option value="Peñaflor">Peñaflor</ion-select-option>
-            <ion-select-option value="Peñalolén">Peñalolén</ion-select-option>
-            <ion-select-option value="Pirque">Pirque</ion-select-option>
-            <ion-select-option value="Providencia"
-              >Providencia</ion-select-option
-            >
-            <ion-select-option value="Pudahuel">Pudahuel</ion-select-option>
-            <ion-select-option value="Puente Alto"
-              >Puente Alto</ion-select-option
-            >
-            <ion-select-option value="Quilicura">Quilicura</ion-select-option>
-            <ion-select-option value="Quinta Normal"
-              >Quinta Normal</ion-select-option
-            >
-            <ion-select-option value="Recoleta">Recoleta</ion-select-option>
-            <ion-select-option value="Renca">Renca</ion-select-option>
-            <ion-select-option value="San Bernardo"
-              >San Bernardo</ion-select-option
-            >
-            <ion-select-option value="San Joaquín"
-              >San Joaquín</ion-select-option
-            >
-            <ion-select-option value="San José de Maipo"
-              >San José de Maipo</ion-select-option
-            >
-            <ion-select-option value="San Miguel">San Miguel</ion-select-option>
-            <ion-select-option value="San Pedro">San Pedro</ion-select-option>
-            <ion-select-option value="San Ramón">San Ramón</ion-select-option>
-            <ion-select-option value="Santiago">Santiago</ion-select-option>
-            <ion-select-option value="Talagante">Talagante</ion-select-option>
-            <ion-select-option value="Tiltil">Tiltil</ion-select-option>
-            <ion-select-option value="Vitacura">Vitacura</ion-select-option>
+              {{ comuna.nombre_comuna }}
+            </ion-select-option>
           </ion-select>
         </ion-item>
+
         <ion-item>
           <ion-label>CONDOMINIO:</ion-label>
-          <ion-select [(ngModel)]="persona.condominio">
-            <ion-select-option value="Lomas del Parque"
-              >Lomas del Parque</ion-select-option
+          <ion-select [(ngModel)]="empleado.condominioEmpleado">
+            <ion-select-option
+              *ngFor="let condominio of condominios"
+              [value]="condominio.id_conjunto"
             >
+              {{ condominio.nombre_conjunto }}
+            </ion-select-option>
           </ion-select>
         </ion-item>
+
         <ion-item>
           <ion-label>CARGO EMPLEADO:</ion-label>
           <ion-select [(ngModel)]="empleado.cargoEmpleado">
-            <ion-select-option value="Guardia">Guardia</ion-select-option>
-            <ion-select-option value="Aseo">Aseo</ion-select-option>
-            <ion-select-option value="Jardinero">Jardinero</ion-select-option>
-            <ion-select-option value="Administrador"
-              >Administrador</ion-select-option
+            <ion-select-option
+              *ngFor="let cargo of cargos"
+              [value]="cargo.id_cargo"
+              >{{ cargo.cargo }}</ion-select-option
             >
           </ion-select>
         </ion-item>

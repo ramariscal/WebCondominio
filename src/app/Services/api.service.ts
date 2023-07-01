@@ -57,5 +57,16 @@ export class ApiService {
     );
   }
 
+  agregarEmpleado(empleadoData: any): Observable<any> {
+    const endpoint = 'agregarEmpleado';
+    return this.http.post(endpoint, empleadoData).pipe(
+      tap((response) => {
+        // Emitir el evento con la respuesta
+        this.eventService.emitApiResponse(response);
+      })
+    );
+  }
+  
+
   // Agrega más métodos según tus necesidades (put, delete, etc.)
 }

@@ -41,16 +41,9 @@
           }}</ion-col
         >
         <ion-col class="column-width">{{ vehiculo.id_est }}</ion-col>
-        <ion-col class="column-width"
-          >{{ formatDate(vehiculo.fecha_ing) }}</ion-col
-        >
-        <ion-col class="column-width"
-          >{{ formatDate(vehiculo.fecha_sal) }}</ion-col
-        >
-        <ion-col class="column-width"
-          >{{ calcularDuracion(vehiculo.fecha_ing, vehiculo.fecha_sal)
-          }}</ion-col
-        >
+        <ion-col class="column-width">{{ vehiculo.fecha_ing_format }}</ion-col>
+        <ion-col class="column-width">{{ vehiculo.fecha_sal_format }}</ion-col>
+        <ion-col class="column-width">{{ vehiculo.tiempo_visita }}</ion-col>
         <ion-col class="column-width">{{ vehiculo.estatus }}</ion-col>
       </ion-row>
     </ion-item>

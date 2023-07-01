@@ -1,1 +1,98 @@
-<p>Hola mundo</p>
+<ion-content>
+  <form [formGroup]="empleadoForm" (ngSubmit)="actualizarEmpleado()">
+    <ion-item>
+      <ion-label position="floating">RUT</ion-label>
+      <ion-input type="text" formControlName="rut"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Nombres</ion-label>
+      <ion-input type="text" formControlName="nombres"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Apellidos</ion-label>
+      <ion-input type="text" formControlName="apellidos"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Correo</ion-label>
+      <ion-input type="email" formControlName="correo"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Estado</ion-label>
+      <ion-select formControlName="estado">
+        <ion-select-option value="">Seleccionar estado</ion-select-option>
+        <ion-select-option value="1">Vinculado</ion-select-option>
+        <ion-select-option value="0">Desvinculado</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Cargo</ion-label>
+      <ion-select formControlName="cargo">
+        <ion-select-option
+          *ngFor="let cargo of cargos"
+          [value]="cargo.id_cargo"
+        >
+          {{ cargo.cargo }}
+        </ion-select-option>
+      </ion-select>
+      <div
+        *ngIf="empleadoForm.get('cargo')?.value"
+        class="current-value-message"
+      >
+        Cargo actual: {{ getCargoActual()?.cargo }}
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Dirección</ion-label>
+      <ion-input type="text" formControlName="direccion"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Región</ion-label>
+      <ion-select formControlName="region" (ionChange)="onChangeRegion()">
+        <ion-select-option
+          *ngFor="let region of regiones"
+          [value]="region.id_region"
+        >
+          {{ region.nombre_region }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div
+      *ngIf="empleadoForm.get('region')?.value"
+      class="current-value-message"
+    >
+      Región actual: {{ getRegionActual()?.nombre_region }}
+    </div>
+
+    <ion-item>
+      <ion-label>Comuna</ion-label>
+      <ion-select formControlName="comuna">
+        <ion-select-option
+          *ngFor="let comuna of comunas"
+          [value]="comuna.id_comuna"
+        >
+          {{ comuna.nombre_comuna }}
+        </ion-select-option>
+      </ion-select>
+      <div
+        *ngIf="empleadoForm.get('comuna')?.value"
+        class="current-value-message"
+      >
+        Comuna actual: {{ getComunaActual()?.nombre_comuna }}
+      </div>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="empleadoForm.invalid">
+      Actualizar empleado
+    </ion-button>
+    <ion-button expand="full" color="medium" (click)="probar()">
+      Cancelar
+    </ion-button>
+  </form>
+</ion-content>

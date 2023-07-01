@@ -3,6 +3,9 @@ import { EmpleadosService } from 'src/app/Services/Personal/empleados.service';
 import { ModalController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { EditarEmpleadosComponent } from 'src/app/modals/editarempleados/editarempleados.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 
 
 @Component({
@@ -22,7 +25,8 @@ export class EmpleadosPage implements OnInit {
   constructor(
     private empleadosService: EmpleadosService,
     private modalController: ModalController,
-    private http: HttpClient
+    private http: HttpClient,
+    private reactiveFormsModule: ReactiveFormsModule
   ) {}
 
   ngOnInit() {
@@ -80,22 +84,22 @@ export class EmpleadosPage implements OnInit {
   }
 
   async abrirModalEditarEmpleado(empleado: any) {
-    this.empleadoSeleccionado = JSON.parse(JSON.stringify(empleado));
-    this.mostrarModal = true;
     const modal = await this.modalController.create({
       component: EditarEmpleadosComponent,
       componentProps: {
-        empleado: empleado
+        empleado: empleado // Pasar el empleado seleccionado como parámetro
       }
     });
-
+  
     await modal.present();
-
+  
     const { data } = await modal.onWillDismiss();
     if (data) {
       this.obtenerEmpleados();
     }
   }
+  
+  
 
   cancelarEdicion() {
     this.empleadoSeleccionado = {};
