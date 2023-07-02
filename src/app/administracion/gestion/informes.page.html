@@ -22,46 +22,52 @@
         <ion-item>
           <ion-label>RUT</ion-label>
           <ion-input
+            placeholder="Ej: 12345678-9"
             type="text"
             [(ngModel)]="rutF"
             (ionChange)="validarRutDV(rutF)"
             #rutInput
+            required
           ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>NOMBRES:</ion-label>
           <ion-input
             placeholder="Primer nombre"
-            [(ngModel)]="persona.primerNombre"
+            [(ngModel)]="empleado.primerNombre"
+            required
           ></ion-input>
           <ion-input
-            placeholder="Segundo nombre"
-            [(ngModel)]="persona.segundoNombre"
+            placeholder="Segundo nombre (opcional)"
+            [(ngModel)]="empleado.segundoNombre"
           ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>APELLIDOS:</ion-label>
           <ion-input
             placeholder="Primer apellido"
-            [(ngModel)]="persona.primerApellido"
+            [(ngModel)]="empleado.primerApellido"
+            required
           ></ion-input>
           <ion-input
-            placeholder="Segundo apellido"
-            [(ngModel)]="persona.segundoApellido"
+            placeholder="Segundo apellido (opcional)"
+            [(ngModel)]="empleado.segundoApellido"
           ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>CORREO:</ion-label>
           <ion-input
-            placeholder="Ingrese correo"
-            [(ngModel)]="persona.correo"
+            placeholder="Ingrese correo. Ej: aaa@aaa.cl"
+            [(ngModel)]="empleado.correo"
+            required
           ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>DIRECCIÓN:</ion-label>
           <ion-input
-            placeholder="Ingrese dirección"
+            placeholder="Ingrese dirección. Ej: Combarbalá 652"
             [(ngModel)]="empleado.direccion"
+            required
           ></ion-input>
         </ion-item>
 
@@ -69,6 +75,7 @@
           <ion-label>REGIÓN:</ion-label>
           <ion-select
             [(ngModel)]="empleado.region"
+            required
             (ionChange)="buscarComunasPorRegion(empleado.region)"
           >
             <ion-select-option
@@ -82,7 +89,7 @@
 
         <ion-item>
           <ion-label>COMUNA:</ion-label>
-          <ion-select [(ngModel)]="empleado.comuna" name="comuna">
+          <ion-select [(ngModel)]="empleado.comuna" name="comuna" required>
             <ion-select-option
               *ngFor="let comuna of comunas"
               [value]="comuna.id_comuna"
@@ -94,7 +101,7 @@
 
         <ion-item>
           <ion-label>CONDOMINIO:</ion-label>
-          <ion-select [(ngModel)]="empleado.condominioEmpleado">
+          <ion-select [(ngModel)]="empleado.condominioEmpleado" required>
             <ion-select-option
               *ngFor="let condominio of condominios"
               [value]="condominio.id_conjunto"
@@ -106,7 +113,7 @@
 
         <ion-item>
           <ion-label>CARGO EMPLEADO:</ion-label>
-          <ion-select [(ngModel)]="empleado.cargoEmpleado">
+          <ion-select [(ngModel)]="empleado.cargoEmpleado" required>
             <ion-select-option
               *ngFor="let cargo of cargos"
               [value]="cargo.id_cargo"
@@ -127,14 +134,14 @@
     <ion-card>
       <ion-card-content>
         <ion-item>
-          <ion-label>RUT:</ion-label>
+          <ion-label>RUT</ion-label>
           <ion-input
-            placeholder="Ingrese RUT"
-            [(ngModel)]="persona.rut"
-          ></ion-input>
-          <ion-input
-            placeholder="Ingrese DV"
-            [(ngModel)]="persona.dv"
+            placeholder="Ej: 12345678-9"
+            type="text"
+            [(ngModel)]="rutF"
+            (ionChange)="validarRutDV(rutF)"
+            #rutInput
+            required
           ></ion-input>
         </ion-item>
         <ion-item>
@@ -142,9 +149,10 @@
           <ion-input
             placeholder="Primer nombre"
             [(ngModel)]="persona.primerNombre"
+            required
           ></ion-input>
           <ion-input
-            placeholder="Segundo nombre"
+            placeholder="Segundo nombre (opcional)"
             [(ngModel)]="persona.segundoNombre"
           ></ion-input>
         </ion-item>
@@ -153,69 +161,75 @@
           <ion-input
             placeholder="Primer apellido"
             [(ngModel)]="persona.primerApellido"
+            required
           ></ion-input>
           <ion-input
-            placeholder="Segundo apellido"
+            placeholder="Segundo apellido (opcional)"
             [(ngModel)]="persona.segundoApellido"
           ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>CORREO:</ion-label>
           <ion-input
-            placeholder="Ingrese correo"
+            placeholder="Ingrese correo. Ej: aaa@aaa.cl"
             [(ngModel)]="persona.correo"
+            required
           ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>TIPO:</ion-label>
-          <ion-select [(ngModel)]="persona.tipo">
-            <ion-select-option value="Propietario"
+          <ion-select [(ngModel)]="persona.tipo_persona" required>
+            <ion-select-option value="propietario"
               >Propietario</ion-select-option
             >
-            <ion-select-option value="Arrendatario"
+            <ion-select-option value="arrendatario"
               >Arrendatario</ion-select-option
             >
           </ion-select>
         </ion-item>
         <ion-item>
           <ion-label>CONDOMINIO:</ion-label>
-          <ion-select [(ngModel)]="persona.condominio">
-            <ion-select-option value="Lomas del Parque"
-              >Lomas del Parque</ion-select-option
+          <ion-select
+            [(ngModel)]="persona.condominioPersona"
+            required
+            (ionChange)="filtrarEdificios()"
+          >
+            <ion-select-option
+              *ngFor="let condominio of condominios"
+              [value]="condominio.id_conjunto"
             >
+              {{ condominio.nombre_conjunto }}
+            </ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item>
           <ion-label>TORRE:</ion-label>
-          <ion-select [(ngModel)]="persona.torre">
-            <ion-select-option value="Torre 1">Torre 1</ion-select-option>
-            <ion-select-option value="Torre 2">Torre 2</ion-select-option>
-            <ion-select-option value="Torre 3">Torre 3</ion-select-option>
-            <ion-select-option value="Torre 4">Torre 4</ion-select-option>
-            <ion-select-option value="Torre 5">Torre 5</ion-select-option>
-            <ion-select-option value="Torre 6">Torre 6</ion-select-option>
-            <ion-select-option value="Torre 7">Torre 7</ion-select-option>
-            <ion-select-option value="Torre 8">Torre 8</ion-select-option>
-            <ion-select-option value="Torre 9">Torre 9</ion-select-option>
-            <ion-select-option value="Torre 10">Torre 10</ion-select-option>
-            <ion-select-option value="Torre 11">Torre 11</ion-select-option>
-            <ion-select-option value="Torre 12">Torre 12</ion-select-option>
+          <ion-select
+            [(ngModel)]="persona.edificioPersona"
+            required
+            (ionChange)="filtrarDepartamentos()"
+          >
+            <ion-select-option
+              *ngFor="let edificio of edificiosFiltrados"
+              [value]="edificio.id_edificio"
+            >
+              {{ edificio.id_edificio }}
+            </ion-select-option>
           </ion-select>
         </ion-item>
         <ion-item>
           <ion-label>DEPTO:</ion-label>
-          <ion-select [(ngModel)]="persona.depto">
-            <ion-select-option value="201">201</ion-select-option>
-            <ion-select-option value="202">202</ion-select-option>
-            <ion-select-option value="203">203</ion-select-option>
-            <ion-select-option value="204">204</ion-select-option>
-            <ion-select-option value="205">205</ion-select-option>
-            <ion-select-option value="206">206</ion-select-option>
-            <ion-select-option value="207">207</ion-select-option>
-            <ion-select-option value="208">208</ion-select-option>
+          <ion-select [(ngModel)]="persona.departamentoPersona" required>
+            <ion-select-option
+              *ngFor="let departamento of departamentosFiltrados"
+              [value]="departamento.id_departamento"
+            >
+              {{ departamento.id_departamento }}
+            </ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-button expand="full" (click)="guardarPersona()"
+
+        <ion-button expand="full" (click)="guardarResidente()"
           >Guardar</ion-button
         >
       </ion-card-content>

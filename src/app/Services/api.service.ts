@@ -66,6 +66,16 @@ export class ApiService {
       })
     );
   }
+
+  agregarResidente(residenteData: any): Observable<any> {
+    const endpoint = 'agregarResidente';
+    return this.http.post(endpoint, residenteData).pipe(
+      tap((response) => {
+        // Emitir el evento con la respuesta
+        this.eventService.emitApiResponse(response);
+      })
+    );
+  }
   
 
   // Agrega más métodos según tus necesidades (put, delete, etc.)

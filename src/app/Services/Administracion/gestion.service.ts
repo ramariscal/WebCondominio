@@ -17,6 +17,8 @@ export class GestionService {
   private buscarComunasPorRegionEndPoint = 'buscarComunasPorRegion';
   private condominiosEndPoint = 'buscarCondominio';
   private buscarRegionPorComunaEndPoint = 'buscarRegionPorComuna';
+  private edificioEndPoint = 'buscarEdificio';
+  private departamentoEndPoint = 'buscarDepartamento';
 
   constructor(
     private apiService: ApiService,
@@ -49,9 +51,18 @@ export class GestionService {
   obtenerCondominios(): Observable<any> {
     return this.apiService.get(this.condominiosEndPoint);
   }
+  obtenerEdificios(): Observable<any> {
+    return this.apiService.get(this.edificioEndPoint);
+  }
+  obtenerDepartamentos(): Observable<any> {
+    return this.apiService.get(this.departamentoEndPoint);
+  }
 
   agregarEmpleado(empleadoData: any): Observable<any> {
     return this.apiService.post('agregarEmpleado', empleadoData);
+  }
+  agregarResidente(residenteData: any): Observable<any> {
+    return this.apiService.post('agregarResidente', residenteData);
   }
   
 }
